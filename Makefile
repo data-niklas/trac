@@ -5,7 +5,7 @@ LIBS= x11
 CFLAGS = -Wall $(shell pkg-config --cflags $(LIBS)) -lm -lstdc++ -pthread
 LDLIBS = $(shell pkg-config --libs $(LIBS))
 LDFLAGS = 
-SRCS=$(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
+SRCS=$(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
 OBJS=$(SRCS:.cpp=.o)
 NAME=trac
 

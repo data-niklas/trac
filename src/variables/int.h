@@ -4,8 +4,8 @@
 
 class Int : public Variable{
     public:
-        int value;
+        long value;
 
-        Int(int value);
+        Int(long value);
         std::string asString();
 };

@@ -7,10 +7,8 @@
 #include "./registry.h"
 
 #include "./variable.h"
-#include "./variables/void.h"
-#include "./variables/boolean.h"
+#include "./variables/literal.h"
 #include "./variables/ident.h"
-#include "./variables/int.h"
 
 Trac::Trac(std::string triggername, std::vector<Variable *> triggerinput, std::vector<std::string> outputnames, std::vector<Call *> conditions, std::vector<Call *> actions)
 {
@@ -68,7 +66,7 @@ int main(int argc, char *argv[])
 {
 
     Registry *registry = Registry::getInstance();
-    TriggerTemplate *triggertemplate = registry->gTrigger("active_window_change");
+    /*TriggerTemplate *triggertemplate = registry->gTrigger("active_window_change");
     std::vector<std::string> names;
     names.push_back("window");
 
@@ -84,11 +82,31 @@ int main(int argc, char *argv[])
     actions.push_back(new Call("print", params));
 
     params.clear();
-    params.push_back(new Int(0x6c0000b));
+    params.push_back(new Int(0x5000001));
     conditions.push_back(new Call("is_active", params));
 
-    Trac *trac = new Trac("active_window_change", std::vector<Variable *>(), names, conditions, actions);
-    //Trigger * trigger = triggertemplate->createTrigger(std::vector<Variable*>(), );
+    Trac *trac = new Trac("active_window_change", std::vector<Variable *>(), names, conditions, actions);*/
+    std::vector<std::string> names;
+    names.push_back("time");
+
+    std::vector<Call *> actions;
+    std::vector<Call *> conditions;
+
+    std::vector<Variable *> params;
+    params.push_back(new Ident("time"));
+    params.push_back(new String("Time: %H:%M:%S fuck you c++"));
+    Call * call = new Call("format_time", params);
+
+    params.clear();
+    params.push_back(call);
+    actions.push_back(new Call("print", params));
+
+    //Every 5 seconds
+    params.clear();
+    params.push_back(new Int(5000));
+
+
+    Trac *trac = new Trac("timed", params, names, conditions, actions);
 
     EventQueue::getInstance()->runLoop();
     return 0;

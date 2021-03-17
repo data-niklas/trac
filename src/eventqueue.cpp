@@ -6,6 +6,10 @@ Event::Event(Trac* callback, std::vector<Variable *> variables)
     this->variables = variables;
 }
 
+IntervalBatch::IntervalBatch(){
+    this->last_called = 0;
+}
+
 void EventQueue::addEvent(Event event)
 {
     this->mutex.lock();
@@ -20,7 +24,7 @@ void EventQueue::registerTick(Trigger *trigger)
 
 void EventQueue::registerInterval(Trigger *trigger, long interval)
 {
-    this->intervals[interval].push_back(trigger);
+    this->intervals[interval].triggers.push_back(trigger);
 }
 
 long currentMillis(){
@@ -49,8 +53,10 @@ void EventQueue::runLoop()
         
         //Run all triggers
         for(auto &kv : this->intervals){
-            if (time_start % kv.first == 0){//Check interval
-                for (auto trigger : kv.second){
+            IntervalBatch &batch = kv.second;
+            if (time_start - batch.last_called >= kv.first){//Check interval
+                batch.last_called = time_start;
+                for (auto trigger : batch.triggers){
                     trigger->onCheck(time_start, milli_diff);
                 }
             }

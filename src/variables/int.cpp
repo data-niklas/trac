@@ -1,6 +1,6 @@
 #include "./int.h"
 
-Int::Int(int value){
+Int::Int(long value){
     this->value = value;
 }
 

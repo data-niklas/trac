@@ -20,6 +20,14 @@ class Event
     private:
 };
 
+
+class IntervalBatch{
+    public:
+        IntervalBatch();
+        std::vector<Trigger *> triggers;
+        long last_called;
+};
+
 class EventQueue
 {
 public:
@@ -33,7 +41,7 @@ public:
 
 private:
     std::vector<Event> events;
-    std::map<long, std::vector<Trigger *>> intervals;
+    std::map<long, IntervalBatch> intervals;
     bool running;
     std::mutex mutex;
 };

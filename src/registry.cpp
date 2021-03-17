@@ -4,7 +4,9 @@
 #include "./triggers/xlibtriggers.h"
 
 #include "./triggertemplates/simpletriggertemplate.h"
+#include "./triggertemplates/timedtriggertemplate.h"
 
+#include "./functions/std/std.h"
 #include "./functions/xlibfunctions.h"
 
 #include "./variables/literal.h"
@@ -18,10 +20,12 @@ void Registry::registerTriggerTemplates(){
     this->rTrigger(new SimpleTriggerTemplate("active_window_change",[](std::vector<Variable*>,Trac* c)->Trigger*{
         return new ActiveWindowChangeTrigger(c);
     }));
+    this->rTrigger(new TimedTriggerTemplate());
 }
 
 
 void Registry::registerFunctions(){
+    registerStd(this);
     registerXLibFunctions(this);
 
     this->rFunction(new Function("print",[](std::vector<Variable*> vars)->Variable*{
