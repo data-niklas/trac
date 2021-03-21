@@ -9,8 +9,11 @@
 #include "./variable.h"
 #include "./variables/literal.h"
 #include "./variables/ident.h"
+#include "./logger.h"
 
-Trac::Trac(std::string triggername, std::vector<Variable *> triggerinput, std::vector<std::string> outputnames, std::vector<Call *> conditions, std::vector<Call *> actions)
+#include "./parser/TracReader.h"
+
+Trac::Trac(string triggername, vector<shared_ptr<Variable>> triggerinput, vector<string> outputnames, vector<Call *> conditions, vector<Call *> actions)
 {
     Registry *registry = Registry::getInstance();
     TriggerTemplate *triggertemplate = registry->gTrigger(triggername);
@@ -21,93 +24,49 @@ Trac::Trac(std::string triggername, std::vector<Variable *> triggerinput, std::v
     this->actions = actions;
 }
 
-void Trac::onTrigger(std::vector<Variable *> parameters)
+void Trac::onTrigger(vector<shared_ptr<Variable>> parameters)
 {
     for (long unsigned int i = 0; i < parameters.size(); i++)
     {
-        Variable *variable = parameters[i];
-        std::string name = this->triggernames[i];
+        shared_ptr<Variable> variable = parameters[i];
+        string name = this->triggernames[i];
 
         //Delete old and unused variables
         if (this->ctx.has(name))
         {
-            delete this->ctx.get(name);
+            //delete this->ctx.get(name);
         }
         this->ctx.set(name, variable);
     }
     for (auto condition : this->conditions)
     {
-        Variable *result = condition->execute(&this->ctx);
-        if (Boolean *boolresult = dynamic_cast<Boolean *>(result))
+        shared_ptr<Variable> result = condition->execute(&this->ctx);
+        if (shared_ptr<Boolean> boolresult = dynamic_pointer_cast<Boolean>(result))
         {
             if (!boolresult->value)
             {
-                delete boolresult;
                 return;
             }
         }
         else
         {
-            std::cout << "No boolean result from condition " << condition->getName() << std::endl;
-            delete result;
+            Logger::getLogger()->warning("No boolean result from condition " + condition->getName());
             return;
         }
-        delete result;
     }
-    for (auto action : this->actions)
-    {
-        Variable *result = action->execute(&this->ctx);
-        //Memory Management! yay
-        delete result;
+    for (auto action : this->actions){
+        action->execute(&this->ctx);
     }
 }
 
 int main(int argc, char *argv[])
 {
 
-    Registry *registry = Registry::getInstance();
-    /*TriggerTemplate *triggertemplate = registry->gTrigger("active_window_change");
-    std::vector<std::string> names;
-    names.push_back("window");
+    parser::TracReader reader;
+    TracResult result = reader.parseFromString("active_window_change() : window ? ! println( window_name( window ) );active_window_change() : window ? ! println(true) println( \"window changed\" );");
+    std::cout << "Parsed" << "\n";
 
-    std::vector<Call *> actions;
-    std::vector<Call *> conditions;
-
-    std::vector<Variable *> params;
-    params.push_back(new Ident("window"));
-    Call * call = new Call("window_name", params);
-
-    params.clear();
-    params.push_back(call);
-    actions.push_back(new Call("print", params));
-
-    params.clear();
-    params.push_back(new Int(0x5000001));
-    conditions.push_back(new Call("is_active", params));
-
-    Trac *trac = new Trac("active_window_change", std::vector<Variable *>(), names, conditions, actions);*/
-    std::vector<std::string> names;
-    names.push_back("time");
-
-    std::vector<Call *> actions;
-    std::vector<Call *> conditions;
-
-    std::vector<Variable *> params;
-    params.push_back(new Ident("time"));
-    params.push_back(new String("Time: %H:%M:%S fuck you c++"));
-    Call * call = new Call("format_time", params);
-
-    params.clear();
-    params.push_back(call);
-    actions.push_back(new Call("print", params));
-
-    //Every 5 seconds
-    params.clear();
-    params.push_back(new Int(5000));
-
-
-    Trac *trac = new Trac("timed", params, names, conditions, actions);
-
+    Logger::getLogger()->info("Loaded all Tracs");
     EventQueue::getInstance()->runLoop();
     return 0;
 }

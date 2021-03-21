@@ -5,16 +5,16 @@
 #include "./variable.h"
 
 
-typedef Variable* (*FunctionCallback)(std::vector<Variable*>);
+typedef shared_ptr<Variable> (*FunctionCallback)(vector<shared_ptr<Variable>>);
 
 class Function{
     public:
-        Function(std::string name, FunctionCallback callback);
+        Function(string name, FunctionCallback callback);
 
-        Variable* call(std::vector<Variable*> vars);
-        std::string getName();
+        shared_ptr<Variable> call(vector<shared_ptr<Variable>> vars);
+        string getName();
 
     private:
         FunctionCallback callback;
-        std::string name;
+        string name;
 };

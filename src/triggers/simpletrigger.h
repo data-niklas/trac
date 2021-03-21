@@ -8,7 +8,7 @@ class SimpleTrigger : public Trigger{
         SimpleTrigger(Trac* callback){
             this->callback = callback;
         }
-        void trigger(std::vector<Variable*> variables){
+        void trigger(vector<shared_ptr<Variable>> variables){
             EventQueue::getInstance()->addEvent(Event(this->callback, variables));
         }
 

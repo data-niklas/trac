@@ -3,16 +3,19 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <memory>
+
+using namespace std;
 
 class Variable;
 
 class Context{
     public:
-        bool has(std::string name);
-        void set(std::string name, Variable* var);
-        void erase(std::string name);
-        Variable* get(std::string name);
+        bool has(string name);
+        void set(string name, shared_ptr<Variable> var);
+        void erase(string name);
+        shared_ptr<Variable> get(string name);
 
     private:
-        std::map<std::string, Variable*> variables;
+        map<string, shared_ptr<Variable>> variables;
 };

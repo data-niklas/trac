@@ -9,10 +9,10 @@
 
 class TriggerTemplate{
     public:
-        virtual std::string getName(){
+        virtual string getName(){
             return "triggertemplate";
         }
-        virtual Trigger * createTrigger(std::vector<Variable*> parameters, Trac* callback){
+        virtual Trigger * createTrigger(vector<shared_ptr<Variable>> parameters, Trac* callback){
             return new Trigger();
         }
 };

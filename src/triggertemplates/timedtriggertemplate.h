@@ -6,9 +6,9 @@
 
 class TimedTriggerTemplate : public TriggerTemplate{
     public:    
-        Trigger * createTrigger(std::vector<Variable*> parameters, Trac* callback){
+        Trigger * createTrigger(vector<shared_ptr<Variable>> parameters, Trac* callback){
             if (parameters.size() == 1){
-                if (Int* interval = dynamic_cast<Int*>(parameters[0])){
+                if (shared_ptr<Int> interval = dynamic_pointer_cast<Int>(parameters[0])){
                      return new TimedTrigger(callback, interval->value);
                 }
                 else return new TimedTrigger(callback, 1000);
@@ -17,7 +17,7 @@ class TimedTriggerTemplate : public TriggerTemplate{
                 return new TimedTrigger(callback, 1000);
             }
         }
-        std::string getName(){
+        string getName(){
             return "timed";
         }
 };

@@ -4,5 +4,5 @@
 
 class Void : public Variable{
     public:
-        std::string asString();
+        string asString();
 };

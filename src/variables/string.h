@@ -6,8 +6,9 @@
 
 class String : public Variable{
     public:
-        std::string value;
+        string value;
 
-        String(std::string value);
-        std::string asString();
+        String(string value);
+        ~String();
+        string asString();
 };

@@ -7,10 +7,10 @@
 
 class Ident : public Variable{
     public:
-        std::string value;
+        string value;
 
-        Ident(std::string value);
-        std::string asString();
-        Variable* execute(Context* context);
+        Ident(string value);
+        string asString();
+        shared_ptr<Variable> execute(Context* context);
         bool isExecutable();
 };

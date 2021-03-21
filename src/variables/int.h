@@ -7,5 +7,6 @@ class Int : public Variable{
         long value;
 
         Int(long value);
-        std::string asString();
+        ~Int();
+        string asString();
 };

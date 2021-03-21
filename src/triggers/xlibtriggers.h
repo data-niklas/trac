@@ -32,8 +32,8 @@ public:
                     {
                         Window result = *(Window *)value; /*  <=== this line seems dubious */
                         XFree(value);
-                        std::vector<Variable*> variables;
-                        variables.push_back(new Int(result)); 
+                        vector<shared_ptr<Variable>> variables;
+                        variables.push_back(shared_ptr<Variable>(new Int(result))); 
                         trigger->trigger(variables);         
                     }
                 }

@@ -4,6 +4,11 @@ Int::Int(long value){
     this->value = value;
 }
 
-std::string Int::asString(){
-    return std::to_string(this->value);
+#include <iostream>
+
+Int::~Int(){
+}
+
+string Int::asString(){
+    return to_string(this->value);
 }

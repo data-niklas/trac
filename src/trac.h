@@ -10,13 +10,13 @@
 
 class Trac{
     public:
-        Trac(std::string triggername, std::vector<Variable*> triggerinput, std::vector<std::string> outputnames, std::vector<Call*> conditions, std::vector<Call*> actions);
-        void onTrigger(std::vector<Variable*> parameters);
+        Trac(string triggername, vector<shared_ptr<Variable>> triggerinput, vector<string> outputnames, vector<Call*> conditions, vector<Call*> actions);
+        void onTrigger(vector<shared_ptr<Variable>> parameters);
         Context ctx;
 
     private:
         Trigger*trigger;
-        std::vector<Call*> conditions;
-        std::vector<Call*> actions;
-        std::vector<std::string> triggernames;
+        vector<Call*> conditions;
+        vector<Call*> actions;
+        vector<string> triggernames;
 };

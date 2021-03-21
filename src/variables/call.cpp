@@ -1,15 +1,15 @@
 #include "./call.h"
 #include "../registry.h"
 
-Call::Call(std::string name, std::vector<Variable*> variables){
+Call::Call(string name, vector<shared_ptr<Variable>> variables){
     Registry* registry = Registry::getInstance();
     //TODO Error Management
     this->function = registry->gFunction(name);
     this->variables = variables;
 }
 
-Variable* Call::execute(Context* context){
-    std::vector<Variable*> variables;
+shared_ptr<Variable> Call::execute(Context* context){
+    vector<shared_ptr<Variable>> variables;
     for(auto var : this->variables){
         if (var->isExecutable()){
             variables.push_back(var->execute(context));
@@ -21,7 +21,7 @@ Variable* Call::execute(Context* context){
     return this->function->call(variables);
 }
 
-std::string Call::getName(){
+string Call::getName(){
     return this->function->getName();
 }
 

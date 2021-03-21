@@ -1,6 +1,6 @@
 #include "./eventqueue.h"
 
-Event::Event(Trac* callback, std::vector<Variable *> variables)
+Event::Event(Trac* callback, vector<shared_ptr<Variable>> variables)
 {
     this->callback = callback;
     this->variables = variables;
@@ -12,9 +12,9 @@ IntervalBatch::IntervalBatch(){
 
 void EventQueue::addEvent(Event event)
 {
-    this->mutex.lock();
+    this->queue_lock.lock();
     this->events.push_back(event);
-    this->mutex.unlock();
+    this->queue_lock.unlock();
 }
 
 void EventQueue::registerTick(Trigger *trigger)
@@ -45,7 +45,7 @@ void EventQueue::runLoop()
 
         //Sleep at least 30 millis
         if (milli_diff < 30){
-            std::this_thread::sleep_for(std::chrono::milliseconds(30-milli_diff));
+            this_thread::sleep_for(chrono::milliseconds(30-milli_diff));
             milli_diff = 30;
         }
 

@@ -1,9 +1,14 @@
 #include "./string.h"
 
-String::String(std::string value){
+String::String(string value){
     this->value = value;
 }
 
-std::string String::asString(){
+#include <iostream>
+
+String::~String(){
+}
+
+string String::asString(){
     return this->value;
 }

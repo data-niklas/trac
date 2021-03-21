@@ -1,14 +1,14 @@
 #include "./function.h"
 
-Function::Function(std::string name, FunctionCallback callback){
+Function::Function(string name, FunctionCallback callback){
     this->callback = callback;
     this->name = name;
 }
 
-Variable* Function::call(std::vector<Variable*> vars){
+shared_ptr<Variable> Function::call(vector<shared_ptr<Variable>> vars){
     return this->callback(vars);
 }
 
-std::string Function::getName(){
+string Function::getName(){
     return this->name;
 }

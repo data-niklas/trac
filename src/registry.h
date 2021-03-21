@@ -17,13 +17,13 @@ class Registry{
         void registerFunctions();
         void rTrigger(TriggerTemplate*trigger);
         void rFunction(Function*function);
-        bool eTrigger(std::string name);
-        bool eFunction(std::string name);
-        TriggerTemplate* gTrigger(std::string name);
-        Function* gFunction(std::string name);
-        std::map<std::string, Function*> functions;
-        std::map<std::string, TriggerTemplate*> triggers;
-        std::vector<Trac> tracs;
+        bool eTrigger(string name);
+        bool eFunction(string name);
+        TriggerTemplate* gTrigger(string name);
+        Function* gFunction(string name);
+        map<string, Function*> functions;
+        map<string, TriggerTemplate*> triggers;
+        vector<Trac> tracs;
 
         static Registry* getInstance();
 };

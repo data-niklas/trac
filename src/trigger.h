@@ -6,7 +6,7 @@
 
 #include "./variable.h"
 
-typedef void (*VariableCallback)(std::vector<Variable*>);
+typedef void (*VariableCallback)(vector<shared_ptr<Variable>>);
 
 class Trigger{
     public:

@@ -9,5 +9,6 @@ class Boolean : public Variable{
         bool value;
 
         Boolean(bool value);
-        std::string asString();
+        ~Boolean();
+        string asString();
 };

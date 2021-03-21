@@ -13,10 +13,10 @@
 class Event
 {
     public:
-        Event(Trac* callback, std::vector<Variable*> variables);
+        Event(Trac* callback, vector<shared_ptr<Variable>> variables);
         Trac* callback;
         
-        std::vector<Variable*> variables;
+        vector<shared_ptr<Variable>> variables;
     private:
 };
 
@@ -24,7 +24,7 @@ class Event
 class IntervalBatch{
     public:
         IntervalBatch();
-        std::vector<Trigger *> triggers;
+        vector<Trigger *> triggers;
         long last_called;
 };
 
@@ -40,8 +40,8 @@ public:
     static EventQueue *getInstance();
 
 private:
-    std::vector<Event> events;
-    std::map<long, IntervalBatch> intervals;
+    vector<Event> events;
+    map<long, IntervalBatch> intervals;
     bool running;
-    std::mutex mutex;
+    mutex queue_lock;
 };

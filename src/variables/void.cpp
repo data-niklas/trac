@@ -1,6 +1,6 @@
 #include "./void.h"
 
 
-std::string Void::asString(){
+string Void::asString(){
     return "void";
 }

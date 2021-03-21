@@ -5,10 +5,10 @@
 
 class Call : public Variable {
     public:
-        Call(std::string name, std::vector<Variable*> variables);
-        std::vector<Variable*> variables;
-        Variable* execute(Context* context);
-        std::string getName();
+        Call(string name, vector<shared_ptr<Variable>> variables);
+        vector<shared_ptr<Variable>> variables;
+        shared_ptr<Variable> execute(Context* context);
+        string getName();
         bool isExecutable();
 
     private:

@@ -31,7 +31,7 @@ class XLib : public Trigger
 public:
     Display *dpy;
     Window root;
-    std::vector<XLibListener> listeners;
+    vector<XLibListener> listeners;
     long mask;
 
     XLib();

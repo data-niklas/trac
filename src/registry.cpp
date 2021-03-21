@@ -10,6 +10,7 @@
 #include "./functions/xlibfunctions.h"
 
 #include "./variables/literal.h"
+#include "./logger.h"
 
 Registry::Registry(){
     this->registerTriggerTemplates();
@@ -17,7 +18,7 @@ Registry::Registry(){
 }
 
 void Registry::registerTriggerTemplates(){
-    this->rTrigger(new SimpleTriggerTemplate("active_window_change",[](std::vector<Variable*>,Trac* c)->Trigger*{
+    this->rTrigger(new SimpleTriggerTemplate("active_window_change",[](vector<shared_ptr<Variable>>,Trac* c)->Trigger*{
         return new ActiveWindowChangeTrigger(c);
     }));
     this->rTrigger(new TimedTriggerTemplate());
@@ -28,13 +29,22 @@ void Registry::registerFunctions(){
     registerStd(this);
     registerXLibFunctions(this);
 
-    this->rFunction(new Function("print",[](std::vector<Variable*> vars)->Variable*{
+    this->rFunction(new Function("println",[](vector<shared_ptr<Variable>> vars)->shared_ptr<Variable>{
         for (auto var : vars){
-            if (String* v = dynamic_cast<String*>(var)){
-                std::cout << v->value << std::endl;
+            if (shared_ptr<String> v = dynamic_pointer_cast<String>(var)){
+                cout << v->value << '\n';
+            }
+            else if (shared_ptr<Int> v = dynamic_pointer_cast<Int>(var)){
+                cout << v->value << '\n';
+            }
+            else if (shared_ptr<Boolean> v = dynamic_pointer_cast<Boolean>(var)){
+                cout << (v->value ? "true" : "false") << '\n';
+            }
+            else if (shared_ptr<Void> v = dynamic_pointer_cast<Void>(var)){
+                cout << '\n';
             }
         }
-        return new Void();
+        return shared_ptr<Variable>(new Void());
     }));
 };
 
@@ -44,7 +54,7 @@ void Registry::rTrigger(TriggerTemplate*trigger){
         this->triggers[name] = trigger;
     }
     else{
-        std::cout << "Trigger " << name << " already exists" << std::endl;
+        Logger::getLogger()->warning("Trigger " + name + " already exists");
     }
 }
 void Registry::rFunction(Function*function){
@@ -53,20 +63,20 @@ void Registry::rFunction(Function*function){
         this->functions[name] = function;
     }
     else{
-        std::cout << "Function " << name << " already exists" << std::endl;
+        Logger::getLogger()->warning("Function " + name + " already exists");
     }
 }
 
-bool Registry::eTrigger(std::string name){
+bool Registry::eTrigger(string name){
     return this->triggers.count(name) != 0;
 }
-bool Registry::eFunction(std::string name){
+bool Registry::eFunction(string name){
     return this->functions.count(name) != 0;
 }
-TriggerTemplate* Registry::gTrigger(std::string name){
+TriggerTemplate* Registry::gTrigger(string name){
     return this->triggers[name];
 }
-Function* Registry::gFunction(std::string name){
+Function* Registry::gFunction(string name){
     return this->functions[name];
 }
 void Registry::addTrac(Trac trac){

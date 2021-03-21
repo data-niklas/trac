@@ -1,16 +1,20 @@
 #pragma once
 
 #include <string>
+#include <memory>
+
+using namespace std;
 
 class Context;
 
 class Variable{
     public:
-        virtual std::string asString(){
+        virtual ~Variable(){}
+        virtual string asString(){
             return "variable";
         }
-        virtual Variable* execute(Context* context){
-            return this;
+        virtual shared_ptr<Variable> execute(Context* context){
+            return shared_ptr<Variable>(this);
         }
         virtual bool isExecutable(){
             return false;
