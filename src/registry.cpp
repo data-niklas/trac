@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "./registry.h"
 #include "./triggers/xlibtriggers.h"
 
@@ -28,24 +26,6 @@ void Registry::registerTriggerTemplates(){
 void Registry::registerFunctions(){
     registerStd(this);
     registerXLibFunctions(this);
-
-    this->rFunction(new Function("println",[](vector<shared_ptr<Variable>> vars)->shared_ptr<Variable>{
-        for (auto var : vars){
-            if (shared_ptr<String> v = dynamic_pointer_cast<String>(var)){
-                cout << v->value << '\n';
-            }
-            else if (shared_ptr<Int> v = dynamic_pointer_cast<Int>(var)){
-                cout << v->value << '\n';
-            }
-            else if (shared_ptr<Boolean> v = dynamic_pointer_cast<Boolean>(var)){
-                cout << (v->value ? "true" : "false") << '\n';
-            }
-            else if (shared_ptr<Void> v = dynamic_pointer_cast<Void>(var)){
-                cout << '\n';
-            }
-        }
-        return shared_ptr<Variable>(new Void());
-    }));
 };
 
 void Registry::rTrigger(TriggerTemplate*trigger){
