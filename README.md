@@ -1,5 +1,5 @@
 
-
+```
 ## Language Specification
 
 <program> ::= <item>
@@ -54,3 +54,4 @@ every(5) : time ? eq(mod(time,5),0) ! shell(notify-send("stop"))
 active_window() : window_id
 ? 
 ! ;
+```
