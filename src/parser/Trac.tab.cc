@@ -933,9 +933,9 @@ namespace parser {
 #line 934 "Trac.tab.cc"
     break;
 
-  case 3: // tracs: trac tracs
+  case 3: // tracs: tracs trac
 #line 91 "Trac.yy"
-                { result.value.push_back(yystack_[1].value.as < Trac* > ()); }
+                { result.value.push_back(yystack_[0].value.as < Trac* > ()); }
 #line 940 "Trac.tab.cc"
     break;
 
@@ -951,9 +951,9 @@ namespace parser {
 #line 952 "Trac.tab.cc"
     break;
 
-  case 6: // calls: call calls
+  case 6: // calls: calls call
 #line 101 "Trac.yy"
-                { yylhs.value.as < vector<Call*> > () = yystack_[0].value.as < vector<Call*> > (); yylhs.value.as < vector<Call*> > ().push_back(yystack_[1].value.as < Call* > ());}
+                { yylhs.value.as < vector<Call*> > () = yystack_[1].value.as < vector<Call*> > (); yylhs.value.as < vector<Call*> > ().push_back(yystack_[0].value.as < Call* > ());}
 #line 958 "Trac.tab.cc"
     break;
 
@@ -969,9 +969,9 @@ namespace parser {
 #line 970 "Trac.tab.cc"
     break;
 
-  case 9: // varnames: IDENTIFIER varnames
+  case 9: // varnames: varnames IDENTIFIER
 #line 111 "Trac.yy"
-                         { yylhs.value.as < vector<string> > () = yystack_[0].value.as < vector<string> > (); yylhs.value.as < vector<string> > ().push_back(yystack_[1].value.as < std::string > ());}
+                         { yylhs.value.as < vector<string> > () = yystack_[1].value.as < vector<string> > (); yylhs.value.as < vector<string> > ().push_back(yystack_[0].value.as < std::string > ());}
 #line 976 "Trac.tab.cc"
     break;
 
@@ -981,9 +981,9 @@ namespace parser {
 #line 982 "Trac.tab.cc"
     break;
 
-  case 11: // vars: variable vars
+  case 11: // vars: vars variable
 #line 116 "Trac.yy"
-                   { yylhs.value.as < vector<shared_ptr<Variable>> > () = yystack_[0].value.as < vector<shared_ptr<Variable>> > (); yylhs.value.as < vector<shared_ptr<Variable>> > ().push_back(yystack_[1].value.as < shared_ptr<Variable> > ());}
+                   { yylhs.value.as < vector<shared_ptr<Variable>> > () = yystack_[1].value.as < vector<shared_ptr<Variable>> > (); yylhs.value.as < vector<shared_ptr<Variable>> > ().push_back(yystack_[0].value.as < shared_ptr<Variable> > ());}
 #line 988 "Trac.tab.cc"
     break;
 
@@ -1219,63 +1219,60 @@ namespace parser {
 
 
 
-  const signed char TracParser::yypact_ninf_ = -22;
+  const signed char TracParser::yypact_ninf_ = -9;
 
   const signed char TracParser::yytable_ninf_ = -1;
 
   const signed char
   TracParser::yypact_[] =
   {
-      -4,     2,    15,    -4,    -3,   -22,   -22,   -22,     7,   -22,
-     -22,   -22,   -22,   -22,     8,    -3,    -3,     6,   -22,     9,
-      16,   -22,    16,    10,   -22,    18,     7,    11,    18,    18,
-     -22,    12,   -22
+      -9,    20,    -9,    -8,    -9,    -9,    -3,    -9,    17,    -9,
+      -9,    -9,     8,    -9,    -9,    -9,    -9,    -9,     3,    10,
+      -9,    -9,    -9,    11,    17,    -9,    -9,     9,    -9
   };
 
   const signed char
   TracParser::yydefact_[] =
   {
-       2,     0,     0,     2,    10,     1,     3,    12,    15,    13,
-      14,    16,    17,    18,     0,    10,    10,     0,    11,     0,
-       8,     7,     8,     0,     9,     5,     0,     0,     5,     5,
-       6,     0,     4
+       2,     0,     1,     0,     3,    10,     0,    12,    15,    13,
+      14,    16,     0,    17,    18,    11,    10,     8,     0,     0,
+       7,     9,     5,     0,     0,     5,     6,     0,     4
   };
 
   const signed char
   TracParser::yypgoto_[] =
   {
-     -22,    17,   -22,   -21,   -19,     3,    -2,   -22
+      -9,    -9,    -9,     2,    -6,    -9,    12,    -9
   };
 
   const signed char
   TracParser::yydefgoto_[] =
   {
-      -1,     2,     3,    27,    13,    23,    14,    15
+      -1,     1,     4,    23,    14,    19,     6,    15
   };
 
   const signed char
   TracParser::yytable_[] =
   {
-       7,     1,     8,     9,    10,    11,    28,    30,    31,    28,
-      28,     4,    12,    18,    19,     5,    16,    20,    17,    21,
-       6,    22,    25,    26,    29,    24,    32
+       7,     5,     8,     9,    10,    11,     7,    12,     8,     9,
+      10,    11,    13,    20,    24,    21,    24,    26,    13,    17,
+       2,    26,    22,    28,    25,     3,    16,    27,    18
   };
 
   const signed char
   TracParser::yycheck_[] =
   {
-       3,     5,     5,     6,     7,     8,    25,    28,    29,    28,
-      29,     9,    15,    15,    16,     0,     9,    11,    10,    10,
-       3,     5,    12,     5,    13,    22,    14
+       3,     9,     5,     6,     7,     8,     3,    10,     5,     6,
+       7,     8,    15,    10,     5,     5,     5,    23,    15,    11,
+       0,    27,    12,    14,    13,     5,     9,    25,    16
   };
 
   const signed char
   TracParser::yystos_[] =
   {
-       0,     5,    17,    18,     9,     0,    17,     3,     5,     6,
-       7,     8,    15,    20,    22,    23,     9,    10,    22,    22,
-      11,    10,     5,    21,    21,    12,     5,    19,    20,    13,
-      19,    19,    14
+       0,    17,     0,     5,    18,     9,    22,     3,     5,     6,
+       7,     8,    10,    15,    20,    23,     9,    11,    22,    21,
+      10,     5,    12,    19,     5,    13,    20,    19,    14
   };
 
   const signed char
@@ -1393,7 +1390,7 @@ namespace parser {
 
 #line 4 "Trac.yy"
 } // parser
-#line 1397 "Trac.tab.cc"
+#line 1394 "Trac.tab.cc"
 
 #line 131 "Trac.yy"
 

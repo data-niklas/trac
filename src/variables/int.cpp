@@ -4,7 +4,6 @@ Int::Int(long value){
     this->value = value;
 }
 
-#include <iostream>
 
 Int::~Int(){
 }

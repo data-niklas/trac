@@ -63,8 +63,7 @@ int main(int argc, char *argv[])
 {
 
     parser::TracReader reader;
-    TracResult result = reader.parseFromString("active_window_change() : window ? ! println( window_name( window ) );active_window_change() : window ? ! println(true) println( \"window changed\" );");
-    std::cout << "Parsed" << "\n";
+    TracResult result = reader.parseFromString("active_window_change():window?!println(window_name(window));timed(1000):m?!println(format_time(m\"%H:%M:%S\"));");
 
     Logger::getLogger()->info("Loaded all Tracs");
     EventQueue::getInstance()->runLoop();

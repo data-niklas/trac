@@ -88,7 +88,7 @@
 
 tracs
    : /* */ { }
-   | trac tracs { result.value.push_back($1); }
+   | tracs trac { result.value.push_back($2); }
    ;
 
 trac
@@ -98,7 +98,7 @@ trac
 
 calls
    :/* */ { $$ = vector<Call*>();}
-   | call calls { $$ = $2; $$.push_back($1);}
+   | calls call { $$ = $1; $$.push_back($2);}
    ;
 
 call
@@ -108,18 +108,18 @@ call
 
 varnames
    :/* */ { $$ = vector<string>();}
-   | IDENTIFIER varnames { $$ = $2; $$.push_back($1);}
+   | varnames IDENTIFIER { $$ = $1; $$.push_back($2);}
    ;
 
 vars
    : /* */ { $$ = vector<shared_ptr<Variable>>();}
-   | variable vars { $$ = $2; $$.push_back($1);}
+   | vars variable { $$ = $1; $$.push_back($2);}
    ;
 	
 variable
    : STRING          { $$ = shared_ptr<String>(new String($1)); }
 	| INTEGER         { $$ = shared_ptr<Int>(new Int($1)); }
-	| FLOAT           { std::cout << "float: " <<  $1 << std::endl; }
+	| FLOAT           { $$ = shared_ptr<Float>(new Float($1)); }
 	| IDENTIFIER      { $$ = shared_ptr<Ident>(new Ident($1)); }
 	| BOOL            { $$ = shared_ptr<Boolean>(new Boolean($1)); }
 	| VOID            { $$ = shared_ptr<Void>(new Void()); }
