@@ -351,11 +351,11 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[57] =
     {   0,
-        0,    0,    0,    0,    0,    0,   26,   23,    1,    2,
-       14,   24,   10,   11,   23,   23,   23,   19,   12,   15,
-       13,   16,   23,   23,    7,    8,    7,    4,    5,   23,
-        1,    0,   22,    0,   23,   19,   18,    6,    3,   19,
-       23,   23,   23,    9,    0,   23,   23,   17,   23,   23,
+        0,    0,    0,    0,    0,    0,   26,   23,    1,    9,
+       14,   24,   10,   11,   23,   23,   24,   19,   12,   15,
+       13,   16,   23,   23,    6,    7,    6,    3,    4,   23,
+        1,    0,   22,    0,   23,   19,   18,    5,    2,   19,
+       23,   23,   23,    8,    0,   23,   23,   17,   23,   23,
        23,   18,   23,   20,   21,    0
     } ;
 
@@ -393,63 +393,63 @@ static const YY_CHAR yy_ec[256] =
 
 static const YY_CHAR yy_meta[28] =
     {   0,
-        1,    2,    2,    2,    2,    2,    2,    1,    1,    1,
-        1,    1,    2,    2,    2,    1,    1,    1,    1,    1,
+        1,    2,    3,    2,    2,    2,    2,    1,    1,    1,
+        2,    1,    2,    2,    2,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1
     } ;
 
 static const flex_int16_t yy_base[61] =
     {   0,
-        0,    0,   25,   26,   82,   81,   83,    0,   80,   86,
-       86,   27,   86,   86,   25,   69,   28,   30,   86,   86,
-       86,    0,   61,   55,   86,   86,   60,   86,   86,    0,
-       68,   38,   86,   42,   57,    0,   36,    0,    0,    0,
-       42,   46,   40,   86,   55,   52,   54,   51,   37,   37,
-       41,   37,   18,    0,    0,   86,   72,   74,   30,   76
+        0,    0,   25,   26,   80,   79,   81,    0,   78,   84,
+       84,   25,   84,   84,   25,   67,   28,   28,   84,   84,
+       84,    0,   59,   53,   84,   84,   65,   84,   84,    0,
+       73,   26,   84,   36,   62,    0,   34,   84,   84,    0,
+       40,   51,   45,   84,   40,   46,   59,   58,   44,   48,
+       44,   39,   27,    0,    0,   84,   59,   62,   31,   65
     } ;
 
 static const flex_int16_t yy_def[61] =
     {   0,
        56,    1,   57,   57,   58,   58,   56,   59,   56,   56,
-       56,   60,   56,   56,   59,   59,   59,   59,   56,   56,
+       56,   60,   56,   56,   59,   59,   56,   59,   56,   56,
        56,   59,   59,   59,   56,   56,   56,   56,   56,   59,
-       56,   60,   56,   60,   59,   18,   59,   59,   59,   18,
+       56,   60,   56,   60,   59,   18,   59,   56,   56,   18,
        59,   59,   59,   56,   60,   59,   59,   59,   59,   59,
        59,   59,   59,   59,   59,    0,   56,   56,   56,   56
     } ;
 
-static const flex_int16_t yy_nxt[114] =
+static const flex_int16_t yy_nxt[112] =
     {   0,
         8,    9,   10,   11,   12,   13,   14,    8,   15,   16,
        17,   18,   19,   20,   21,    8,    8,   22,    8,    8,
        23,    8,    8,    8,    8,   24,    8,   26,   26,   33,
-       30,   33,   27,   27,   35,   38,   36,   55,   39,   35,
-       33,   40,   33,   34,   33,   41,   33,   37,   52,   41,
-       47,   46,   52,   48,   34,   46,   54,   33,   34,   33,
-       51,   53,   48,   52,   45,   48,   50,   49,   37,   31,
-       44,   34,   25,   25,   28,   28,   32,   32,   43,   42,
-       37,   31,   56,   29,   29,    7,   56,   56,   56,   56,
+       33,   30,   27,   27,   35,   38,   36,   35,   39,   40,
+       33,   34,   34,   41,   33,   37,   55,   41,   47,   46,
+       52,   48,   34,   46,   51,   52,   34,   52,   45,   25,
+       25,   25,   28,   28,   28,   32,   32,   54,   53,   48,
+       48,   50,   49,   37,   31,   44,   43,   42,   37,   31,
+       56,   29,   29,    7,   56,   56,   56,   56,   56,   56,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
 
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
-       56,   56,   56
+       56
     } ;
 
-static const flex_int16_t yy_chk[114] =
+static const flex_int16_t yy_chk[112] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    3,    4,   12,
-       59,   12,    3,    4,   15,   17,   15,   53,   17,   18,
-       32,   18,   32,   12,   34,   18,   34,   37,   52,   18,
-       41,   37,   51,   41,   32,   37,   50,   45,   34,   45,
-       46,   49,   48,   46,   34,   47,   43,   42,   35,   31,
-       27,   45,   57,   57,   58,   58,   60,   60,   24,   23,
-       16,    9,    7,    6,    5,   56,   56,   56,   56,   56,
+       32,   59,    3,    4,   15,   17,   15,   18,   17,   18,
+       34,   12,   32,   18,   45,   37,   53,   18,   41,   37,
+       52,   41,   34,   37,   46,   51,   45,   46,   34,   57,
+       57,   57,   58,   58,   58,   60,   60,   50,   49,   48,
+       47,   43,   42,   35,   31,   27,   24,   23,   16,    9,
+        7,    6,    5,   56,   56,   56,   56,   56,   56,   56,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
 
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
-       56,   56,   56
+       56
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -625,14 +625,9 @@ YY_DECL
 /* Executed at the beginning of yylex */
 yylval = lval;
 
- 
- /* ### ADD TOKEN MATCHING RULES HERE ###
- 
- /* --- Example ------------------------------------------------------------- */
 
- /* Whitespaces and New Lines */
 
-#line 635 "Trac.yy.cc"
+#line 630 "Trac.yy.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -671,7 +666,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 86 );
+		while ( yy_base[yy_current_state] != 84 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -697,93 +692,92 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 49 "Trac.l"
+#line 44 "Trac.l"
 { ; }
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 50 "Trac.l"
-{ loc->lines(); }
-	YY_BREAK
-/* Single Line Comment */
-case 3:
-YY_RULE_SETUP
-#line 54 "Trac.l"
+#line 47 "Trac.l"
 { BEGIN(SINGLE_LINE_COMMENT); }
 	YY_BREAK
-case 4:
+case 3:
 YY_RULE_SETUP
-#line 55 "Trac.l"
+#line 48 "Trac.l"
 { yymore(); }
 	YY_BREAK
-case 5:
-/* rule 5 can match eol */
+case 4:
+/* rule 4 can match eol */
 YY_RULE_SETUP
-#line 56 "Trac.l"
+#line 49 "Trac.l"
 { loc->lines(); BEGIN(0); }
+	YY_BREAK
+case 5:
+YY_RULE_SETUP
+#line 51 "Trac.l"
+{ BEGIN(MULTI_LINE_COMMENT); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 58 "Trac.l"
-{ BEGIN(MULTI_LINE_COMMENT); }
-	YY_BREAK
-case 7:
-YY_RULE_SETUP
-#line 59 "Trac.l"
+#line 52 "Trac.l"
 { yymore(); }
 	YY_BREAK
-case 8:
-/* rule 8 can match eol */
+case 7:
+/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 60 "Trac.l"
+#line 53 "Trac.l"
 { loc->lines(); yymore(); }
 	YY_BREAK
-case 9:
+case 8:
 YY_RULE_SETUP
-#line 61 "Trac.l"
+#line 54 "Trac.l"
 { BEGIN(0); }
+	YY_BREAK
+case 9:
+/* rule 9 can match eol */
+YY_RULE_SETUP
+#line 56 "Trac.l"
+{ loc->lines(); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 63 "Trac.l"
+#line 58 "Trac.l"
 { return token::LPAREN;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 64 "Trac.l"
+#line 59 "Trac.l"
 { return token::RPAREN;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 65 "Trac.l"
+#line 60 "Trac.l"
 { return token::COLON;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 66 "Trac.l"
+#line 61 "Trac.l"
 { return token::QUESTION;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 67 "Trac.l"
+#line 62 "Trac.l"
 { return token::ACTION;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 68 "Trac.l"
+#line 63 "Trac.l"
 { return token::SEMICOLON;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 69 "Trac.l"
+#line 64 "Trac.l"
 { return token::VOID;}
 	YY_BREAK
 /* Keywords */
 /* Floating Point: +1e10, 1e5, -1e-3 */
 case 17:
 YY_RULE_SETUP
-#line 74 "Trac.l"
+#line 69 "Trac.l"
 {
 	yylval->build<double>(std::stod(std::string(yytext)));
 	return token::FLOAT;
@@ -792,7 +786,7 @@ YY_RULE_SETUP
 /* Floating Point: +1.02e10, 1.003, -1e-3, .0 */
 case 18:
 YY_RULE_SETUP
-#line 80 "Trac.l"
+#line 75 "Trac.l"
 {
 	yylval->build<double>(std::stod(std::string(yytext)));
 	return token::FLOAT;
@@ -801,7 +795,7 @@ YY_RULE_SETUP
 /* Integer */
 case 19:
 YY_RULE_SETUP
-#line 87 "Trac.l"
+#line 82 "Trac.l"
 {
 		yylval->build<long>(std::stol(std::string(yytext)));
 		return token::INTEGER;
@@ -809,7 +803,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 92 "Trac.l"
+#line 87 "Trac.l"
 {
 		yylval->build<bool>(true);
 		return token::BOOL;
@@ -817,7 +811,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 97 "Trac.l"
+#line 92 "Trac.l"
 {
 		yylval->build<bool>(false);
 		return token::BOOL;
@@ -825,27 +819,24 @@ YY_RULE_SETUP
 	YY_BREAK
 /* String */
 case 22:
-/* rule 22 can match eol */
 YY_RULE_SETUP
-#line 104 "Trac.l"
+#line 99 "Trac.l"
 {
 		// Note: '\r' is handled as a whitespace, so we don't need to deal 
 		// with it here.
-		const bool malformed = yytext[yyleng-1] != '"';
-		if (!malformed)
-			 yytext[yyleng-1] = '\0';
+		yytext[yyleng-1] = '\0';
 		std::string text = std::string(yytext + 1);
-		int pos;
+		long unsigned int pos;
 		while((pos = text.find("\\n")) != std::string::npos) {
         	text.replace(pos, 2, "\n");
     	}
 		yylval->build<std::string>(text); // +1 skips initial quote	
-		return malformed? token::MALFORMED_STRING : token::STRING;		
+		return token::STRING;		
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 119 "Trac.l"
+#line 112 "Trac.l"
 {
 		yylval->build<std::string>(yytext);
 		return token::IDENTIFIER; 
@@ -854,16 +845,16 @@ YY_RULE_SETUP
 /* Unmatched */
 case 24:
 YY_RULE_SETUP
-#line 126 "Trac.l"
+#line 119 "Trac.l"
 { return yytext[0]; }
 	YY_BREAK
 /* ------------------------------------------------------------------------- */
 case 25:
 YY_RULE_SETUP
-#line 130 "Trac.l"
+#line 123 "Trac.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 866 "Trac.yy.cc"
+#line 857 "Trac.yy.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_LINE_COMMENT):
 case YY_STATE_EOF(SINGLE_LINE_COMMENT):
@@ -1828,7 +1819,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 130 "Trac.l"
+#line 123 "Trac.l"
 
 
 	

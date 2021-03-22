@@ -13,4 +13,5 @@ class Trigger{
         Trigger(){}
         //Called on each iteration / tick / interval
         virtual void onCheck(long time, long millidiff){}
+        virtual void stop(){}
 };

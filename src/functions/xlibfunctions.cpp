@@ -12,13 +12,13 @@ void registerXLibFunctions(Registry* r){
         if (shared_ptr<Int> intvalue = dynamic_pointer_cast<Int>(var)){
                 Window window = intvalue->value;
                 if (window == 0){
-                    return shared_ptr<Variable>(new Void());
+                    return Void::noreturn();
                 }
                 XTextProperty prop;
                 XGetWMName(xlib->dpy, window, &prop);
                 return shared_ptr<Variable>(new String(string((char*)prop.value)));
         }
-        return shared_ptr<Variable>(new Void());
+        return Void::noreturn();
     }));
 
     r->rFunction(new Function("is_active",[](vector<shared_ptr<Variable>> variables)->shared_ptr<Variable>{
@@ -30,6 +30,6 @@ void registerXLibFunctions(Registry* r){
         else if (shared_ptr<Int> var = dynamic_pointer_cast<Int>(variables[0])){
             return shared_ptr<Variable>(new Boolean(window == (long unsigned int)var->value));
         }
-        else return shared_ptr<Variable>(new Void());
+        else return Void::noreturn();
     }));
 }

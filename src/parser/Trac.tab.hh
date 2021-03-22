@@ -51,7 +51,8 @@
    #include <memory>
    #include "../variables/literal.h" 
    #include "../variables/ident.h"   
-   #include "../variables/call.h"   
+   #include "../variables/call.h"    
+   #include "../error.h"   
    #include "../trac.h"  
    #include "./TracResult.h"
    namespace parser {
@@ -69,7 +70,7 @@
 # endif
 
 
-#line 73 "Trac.tab.hh"
+#line 74 "Trac.tab.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -204,7 +205,7 @@
 
 #line 4 "Trac.yy"
 namespace parser {
-#line 208 "Trac.tab.hh"
+#line 209 "Trac.tab.hh"
 
 
 
@@ -437,7 +438,6 @@ namespace parser {
       char dummy6[sizeof (shared_ptr<Variable>)];
 
       // STRING
-      // MALFORMED_STRING
       // IDENTIFIER
       char dummy7[sizeof (std::string)];
 
@@ -501,18 +501,17 @@ namespace parser {
     YYerror = 256,                 // error
     YYUNDEF = 257,                 // "invalid token"
     STRING = 258,                  // STRING
-    MALFORMED_STRING = 259,        // MALFORMED_STRING
-    IDENTIFIER = 260,              // IDENTIFIER
-    INTEGER = 261,                 // INTEGER
-    FLOAT = 262,                   // FLOAT
-    BOOL = 263,                    // BOOL
-    LPAREN = 264,                  // LPAREN
-    RPAREN = 265,                  // RPAREN
-    COLON = 266,                   // COLON
-    QUESTION = 267,                // QUESTION
-    ACTION = 268,                  // ACTION
-    SEMICOLON = 269,               // SEMICOLON
-    VOID = 270                     // VOID
+    IDENTIFIER = 259,              // IDENTIFIER
+    INTEGER = 260,                 // INTEGER
+    FLOAT = 261,                   // FLOAT
+    BOOL = 262,                    // BOOL
+    LPAREN = 263,                  // LPAREN
+    RPAREN = 264,                  // RPAREN
+    COLON = 265,                   // COLON
+    QUESTION = 266,                // QUESTION
+    ACTION = 267,                  // ACTION
+    SEMICOLON = 268,               // SEMICOLON
+    VOID = 269                     // VOID
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -529,32 +528,31 @@ namespace parser {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 16, ///< Number of tokens.
+        YYNTOKENS = 15, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
         S_YYUNDEF = 2,                           // "invalid token"
         S_STRING = 3,                            // STRING
-        S_MALFORMED_STRING = 4,                  // MALFORMED_STRING
-        S_IDENTIFIER = 5,                        // IDENTIFIER
-        S_INTEGER = 6,                           // INTEGER
-        S_FLOAT = 7,                             // FLOAT
-        S_BOOL = 8,                              // BOOL
-        S_LPAREN = 9,                            // LPAREN
-        S_RPAREN = 10,                           // RPAREN
-        S_COLON = 11,                            // COLON
-        S_QUESTION = 12,                         // QUESTION
-        S_ACTION = 13,                           // ACTION
-        S_SEMICOLON = 14,                        // SEMICOLON
-        S_VOID = 15,                             // VOID
-        S_YYACCEPT = 16,                         // $accept
-        S_tracs = 17,                            // tracs
-        S_trac = 18,                             // trac
-        S_calls = 19,                            // calls
-        S_call = 20,                             // call
-        S_varnames = 21,                         // varnames
-        S_vars = 22,                             // vars
-        S_variable = 23                          // variable
+        S_IDENTIFIER = 4,                        // IDENTIFIER
+        S_INTEGER = 5,                           // INTEGER
+        S_FLOAT = 6,                             // FLOAT
+        S_BOOL = 7,                              // BOOL
+        S_LPAREN = 8,                            // LPAREN
+        S_RPAREN = 9,                            // RPAREN
+        S_COLON = 10,                            // COLON
+        S_QUESTION = 11,                         // QUESTION
+        S_ACTION = 12,                           // ACTION
+        S_SEMICOLON = 13,                        // SEMICOLON
+        S_VOID = 14,                             // VOID
+        S_YYACCEPT = 15,                         // $accept
+        S_tracs = 16,                            // tracs
+        S_trac = 17,                             // trac
+        S_calls = 18,                            // calls
+        S_call = 19,                             // call
+        S_varnames = 20,                         // varnames
+        S_vars = 21,                             // vars
+        S_variable = 22                          // variable
       };
     };
 
@@ -616,7 +614,6 @@ namespace parser {
         break;
 
       case symbol_kind::S_STRING: // STRING
-      case symbol_kind::S_MALFORMED_STRING: // MALFORMED_STRING
       case symbol_kind::S_IDENTIFIER: // IDENTIFIER
         value.move< std::string > (std::move (that.value));
         break;
@@ -833,7 +830,6 @@ switch (yykind)
         break;
 
       case symbol_kind::S_STRING: // STRING
-      case symbol_kind::S_MALFORMED_STRING: // MALFORMED_STRING
       case symbol_kind::S_IDENTIFIER: // IDENTIFIER
         value.template destroy< std::string > ();
         break;
@@ -995,13 +991,13 @@ switch (yykind)
       symbol_type (int tok, std::string v, location_type l)
         : super_type(token_type (tok), std::move (v), std::move (l))
       {
-        YY_ASSERT (tok == token::STRING || tok == token::MALFORMED_STRING || tok == token::IDENTIFIER);
+        YY_ASSERT (tok == token::STRING || tok == token::IDENTIFIER);
       }
 #else
       symbol_type (int tok, const std::string& v, const location_type& l)
         : super_type(token_type (tok), v, l)
       {
-        YY_ASSERT (tok == token::STRING || tok == token::MALFORMED_STRING || tok == token::IDENTIFIER);
+        YY_ASSERT (tok == token::STRING || tok == token::IDENTIFIER);
       }
 #endif
     };
@@ -1113,21 +1109,6 @@ switch (yykind)
       make_STRING (const std::string& v, const location_type& l)
       {
         return symbol_type (token::STRING, v, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_MALFORMED_STRING (std::string v, location_type l)
-      {
-        return symbol_type (token::MALFORMED_STRING, std::move (v), std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_MALFORMED_STRING (const std::string& v, const location_type& l)
-      {
-        return symbol_type (token::MALFORMED_STRING, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1372,7 +1353,7 @@ switch (yykind)
 
 #if YYDEBUG
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-    static const signed char yyrline_[];
+    static const unsigned char yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r) const;
     /// Print the state stack on the debug stream.
@@ -1599,7 +1580,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 28,     ///< Last index in yytable_.
+      yylast_ = 29,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 2 ///< Termination state number.
     };
@@ -1615,7 +1596,7 @@ switch (yykind)
 
 #line 4 "Trac.yy"
 } // parser
-#line 1619 "Trac.tab.hh"
+#line 1600 "Trac.tab.hh"
 
 
 

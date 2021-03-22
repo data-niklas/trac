@@ -1,10 +1,15 @@
 #include "./call.h"
 #include "../registry.h"
+#include "../logger.h"
 
 Call::Call(string name, vector<shared_ptr<Variable>> variables){
     Registry* registry = Registry::getInstance();
-    //TODO Error Management
-    this->function = registry->gFunction(name);
+    
+    if (registry->eFunction(name))this->function = registry->gFunction(name);
+    else {
+        this->function = registry->gFunction("");
+        Logger::getLogger()->error("Function " + name + " does not exist");
+    }
     this->variables = variables;
 }
 

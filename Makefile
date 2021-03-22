@@ -22,7 +22,7 @@ parser:
 	rm src/parser/*.output
 
 build: $(SRCS)
-	$(CC) -o $(NAME) $^ $(CFLAGS) $(LDLIBS)	
+	$(CC) -o $(NAME) $^ $(CFLAGS) $(LDLIBS)	-O3
 
 debug: $(SRCS)
 	$(CC) -o $(NAME) $^ $(CFLAGS) -g $(LDLIBS)

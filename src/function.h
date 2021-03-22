@@ -3,6 +3,10 @@
 #include <vector>
 
 #include "./variable.h"
+#include "./error.h"
+#include "./errors/notfound.h"
+#include "./errors/invalidarguments.h"
+#include "./errors/invalidtype.h"
 
 
 typedef shared_ptr<Variable> (*FunctionCallback)(vector<shared_ptr<Variable>>);

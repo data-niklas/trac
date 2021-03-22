@@ -7,7 +7,8 @@
 using namespace std;
 
 enum LogLevel{
-    All,
+    Debug = -1,
+    Info,
     Warning,
     Error,
     Off
@@ -21,6 +22,7 @@ class Logger{
         void info(string text);
         void warning(string text);
         void error(string text);
+        void debug(string text);
         LogLevel loglevel;
     private:
         static map<string, string> styles;

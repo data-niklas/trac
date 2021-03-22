@@ -38,17 +38,10 @@ WS [ \t\b\f\r]+
 /* Executed at the beginning of yylex */
 yylval = lval;
 %}
- 
- /* ### ADD TOKEN MATCHING RULES HERE ###
- 
- /* --- Example ------------------------------------------------------------- */
 
- /* Whitespaces and New Lines */
 
 {WS} { ; }
-\n { loc->lines(); }
 
- /* Single Line Comment */
 
 "//" { BEGIN(SINGLE_LINE_COMMENT); }
 <SINGLE_LINE_COMMENT>.    { yymore(); }
@@ -58,6 +51,8 @@ yylval = lval;
 <MULTI_LINE_COMMENT>.    { yymore(); }
 <MULTI_LINE_COMMENT>\n   { loc->lines(); yymore(); }
 <MULTI_LINE_COMMENT>"*/" { BEGIN(0); }
+
+\n { loc->lines(); }
 
 "(" { return token::LPAREN;}
 ")" { return token::RPAREN;}
@@ -100,22 +95,20 @@ false {
 
  /* String */
  
-\"([^"\n]|\\n)*["\n] {
+\"([^"\n]|\\n)*["] {
 		// Note: '\r' is handled as a whitespace, so we don't need to deal 
 		// with it here.
-		const bool malformed = yytext[yyleng-1] != '"';
-		if (!malformed)
-			 yytext[yyleng-1] = '\0';
+		yytext[yyleng-1] = '\0';
 		std::string text = std::string(yytext + 1);
-		int pos;
+		long unsigned int pos;
 		while((pos = text.find("\\n")) != std::string::npos) {
         	text.replace(pos, 2, "\n");
     	}
 		yylval->build<std::string>(text); // +1 skips initial quote	
-		return malformed? token::MALFORMED_STRING : token::STRING;		
+		return token::STRING;		
 }
 
-[^\t\b\f\r\n ():!?;"]+ {
+[^\t\b\f\r\n/ ():!?;"]+ {
 		yylval->build<std::string>(yytext);
 		return token::IDENTIFIER; 
 }

@@ -40,23 +40,29 @@ shared_ptr<Variable> formatTime(vector<shared_ptr<Variable>> params){
                 buffer << put_time(localtime(&timeins), format->value.c_str());
                 return shared_ptr<Variable>(new String(buffer.str()));
             }
+        else throw InvalidType("String", "function format_time");
         }
+        else throw InvalidType("Int", "function format_time");
     }
-    return shared_ptr<Variable>(new Void());
+    else throw InvalidArguments(2, params.size(), "function format_time");
+}
+
+shared_ptr<Variable> toString(vector<shared_ptr<Variable>> params){
+    return Void::noreturn();
 }
 
 shared_ptr<Variable> println(vector<shared_ptr<Variable>> vars){
     for (auto var : vars){
         println(var);
     }
-    return shared_ptr<Variable>(new Void());
+    return Void::noreturn();
 }
 
 shared_ptr<Variable> print(vector<shared_ptr<Variable>> vars){
     for (auto var : vars){
         print(var);
     }
-    return shared_ptr<Variable>(new Void());
+    return Void::noreturn();
 }
 
 void registerString(Registry* r){

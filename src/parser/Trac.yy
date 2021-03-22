@@ -10,7 +10,8 @@
    #include <memory>
    #include "../variables/literal.h" 
    #include "../variables/ident.h"   
-   #include "../variables/call.h"   
+   #include "../variables/call.h"    
+   #include "../error.h"   
    #include "../trac.h"  
    #include "./TracResult.h"
    namespace parser {
@@ -44,6 +45,8 @@
    
    #include "./TracReader.h"
    #include "./TracScanner.h" 
+   #include "../logger.h" 
+   Logger* logger = Logger::getLogger();
 
    #undef yylex
    #define yylex scanner.yylex
@@ -58,7 +61,6 @@
 
 %token               END    0     "end of file"
 %token <std::string> STRING
-%token <std::string> MALFORMED_STRING
 %token <std::string> IDENTIFIER
 %token <long> INTEGER
 %token <double> FLOAT
@@ -87,32 +89,53 @@
 %%
 
 tracs
-   : /* */ { }
-   | tracs trac { result.value.push_back($2); }
+   :  { }
+   | tracs trac { if ($2 != nullptr)result.value.push_back($2); }
    ;
 
 trac
-   : IDENTIFIER LPAREN vars RPAREN COLON varnames QUESTION calls ACTION calls SEMICOLON { $$ = new Trac($1, $3, $6, $8, $10); }
+   : IDENTIFIER LPAREN vars RPAREN COLON varnames QUESTION calls ACTION calls SEMICOLON { 
+      try{
+         $$ = new Trac($1, $3, $6, $8, $10);
+      }
+      catch(TracError &e){
+         e.print();
+         logger->info("Skipping Trac " + $1);
+         $$ = nullptr;
+      } 
+   }
    ;
 
 
 calls
-   :/* */ { $$ = vector<Call*>();}
+   :{ $$ = vector<Call*>();}
    | calls call { $$ = $1; $$.push_back($2);}
    ;
 
 call
-   : IDENTIFIER LPAREN vars RPAREN { $$ = new Call($1, $3);}
+   : IDENTIFIER LPAREN vars RPAREN { 
+      bool error = false;
+      for (auto &var : $3){
+         if (shared_ptr<Call> callvar = dynamic_pointer_cast<Call>(var)){
+            if (callvar->getName().empty()){
+               $$ = new Call("",$3);
+               error = true;
+               break;
+            }
+         }
+      }
+      if (!error)$$ = new Call($1, $3);
+   }
    ;
 
 
 varnames
-   :/* */ { $$ = vector<string>();}
+   : { $$ = vector<string>();}
    | varnames IDENTIFIER { $$ = $1; $$.push_back($2);}
    ;
 
 vars
-   : /* */ { $$ = vector<shared_ptr<Variable>>();}
+   :  { $$ = vector<shared_ptr<Variable>>();}
    | vars variable { $$ = $1; $$.push_back($2);}
    ;
 	

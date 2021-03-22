@@ -5,6 +5,7 @@
 #include "./TracReader.h"
 #include "./Trac.tab.hh"
 #include "./TracScanner.h"
+#include "../logger.h"
 
 namespace parser {
 
@@ -60,7 +61,6 @@ TracResult TracReader::parseFromStream(std::istream &stream) {
 		std::cout << "Parse failed.\n";
 		std::exit(1);
 	} else {
-		std::cout << "Parse succeed.\n";
 	} // end else
 	return result;
 

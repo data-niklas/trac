@@ -1,4 +1,5 @@
 #include "./eventqueue.h"
+#include "./logger.h"
 
 Event::Event(Trac* callback, vector<shared_ptr<Variable>> variables)
 {
@@ -42,6 +43,7 @@ void EventQueue::runLoop()
     {
         time_start = currentMillis();
         long milli_diff = time_start - last_time;
+        //Logger::getLogger()->debug("Processed eventqueue in " + to_string(milli_diff) + " milliseconds");
 
         //Sleep at least 30 millis
         if (milli_diff < 30){

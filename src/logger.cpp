@@ -39,9 +39,17 @@ map<string, string> Logger::styles = map<string, string>{
     {"cyan", "36"},
     {"white", "37"}};
 
+void Logger::debug(string text)
+{
+    if (this->loglevel > LogLevel::Debug)return;
+    string headstyles[] = {"cyan", "bold"};
+    string styles[] = {"cyan"};
+    cout << this->style("Debug: ", headstyles, 2) << this->style(text, styles, 1) << '\n';
+}
+
 void Logger::info(string text)
 {
-    if (this->loglevel > LogLevel::All)return;
+    if (this->loglevel > LogLevel::Info)return;
     string headstyles[] = {"white", "bold"};
     string styles[] = {"white"};
     cout << this->style("Info: ", headstyles, 2) << this->style(text, styles, 1) << '\n';
