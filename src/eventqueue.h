@@ -36,6 +36,8 @@ public:
     void registerInterval(Trigger *trigger, long interval);
 
     void runLoop();
+    void runLoop(long interval);
+    void stop();
 
     static EventQueue *getInstance();
 
@@ -43,5 +45,6 @@ private:
     vector<Event> events;
     map<long, IntervalBatch> intervals;
     bool running;
+    long interval;
     mutex queue_lock;
 };

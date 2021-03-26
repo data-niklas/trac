@@ -1,4 +1,4 @@
 #pragma once
-#include "../../registry.h"
+#include "./std.h"
 
 void registerString(Registry* r);

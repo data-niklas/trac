@@ -7,6 +7,8 @@ using namespace std;
 
 class Context;
 
+#define IS_TYPE(type, name, var) shared_ptr<type> name = dynamic_pointer_cast<type>(var)
+
 class Variable{
     public:
         virtual ~Variable(){}

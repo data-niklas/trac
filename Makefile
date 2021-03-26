@@ -1,8 +1,8 @@
 .POSIX:
 .SUFFIXES:
-CC     = gcc
+CC     = g++
 LIBS= x11
-CFLAGS = -Wall $(shell pkg-config --cflags $(LIBS)) -lm -lstdc++ -pthread
+CFLAGS = -Wall $(shell pkg-config --cflags $(LIBS)) -lm -lstdc++ -pthread -std=c++17
 LDLIBS = $(shell pkg-config --libs $(LIBS))
 LDFLAGS = 
 SRCS=$(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*.cc) $(wildcard src/*/*/*.cpp)
@@ -22,6 +22,9 @@ parser:
 	rm src/parser/*.output
 
 build: $(SRCS)
+	$(CC) -o $(NAME) $^ $(CFLAGS) $(LDLIBS)	-O0
+
+production: $(SRCS)
 	$(CC) -o $(NAME) $^ $(CFLAGS) $(LDLIBS)	-O3
 
 debug: $(SRCS)

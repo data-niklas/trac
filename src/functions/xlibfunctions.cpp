@@ -9,7 +9,7 @@ void registerXLibFunctions(Registry* r){
     r->rFunction(new Function("window_name",[](vector<shared_ptr<Variable>> variables)->shared_ptr<Variable>{
         XLib * xlib = XLib::getInstance();
         shared_ptr<Variable> var = variables[0];
-        if (shared_ptr<Int> intvalue = dynamic_pointer_cast<Int>(var)){
+        if (IS_TYPE(Int, intvalue, var)){
                 Window window = intvalue->value;
                 if (window == 0){
                     return Void::noreturn();
