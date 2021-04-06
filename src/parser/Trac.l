@@ -61,6 +61,8 @@ yylval = lval;
 "!" { return token::ACTION;}
 ";" { return token::SEMICOLON;}
 "_" { return token::VOID;}
+"[" { return token::LBRACKET;}
+"]" { return token::RBRACKET;}
 
  /* Keywords */
 	
@@ -108,7 +110,7 @@ false {
 		return token::STRING;		
 }
 
-[^\t\b\f\r\n/ ():!?;"]+ {
+[^\t\b\f\r\n/\[\] (),:!?;"]+ {
 		yylval->build<std::string>(yytext);
 		return token::IDENTIFIER; 
 }

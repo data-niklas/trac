@@ -23,6 +23,15 @@ void print(shared_ptr<Variable> var)
     {
         cout << (v->value ? "true" : "false");
     }
+    else if (shared_ptr<List> v = dynamic_pointer_cast<List>(var)){
+        cout << "[";
+        if (v->value.size() != 0)print(v->value[0]);
+        for (long unsigned int i = 1; i < v->value.size(); i++){
+            cout << ", ";
+            print(v->value[i]);
+        }
+        cout << "]";
+    }
     else if (shared_ptr<Void> v = dynamic_pointer_cast<Void>(var))
     {
     }
@@ -61,27 +70,7 @@ shared_ptr<Variable> toString(vector<shared_ptr<Variable>> params)
 {
     if (params.size() == 1)
     {
-        if (IS_TYPE(Boolean, var, params[0]))
-        {
-            return shared_ptr<String>(new String(var->value ? "true" : "false"));
-        }
-        else if (IS_TYPE(Float, var, params[0]))
-        {
-            return shared_ptr<String>(new String(to_string(var->value)));
-        }
-        else if (IS_TYPE(Int, var, params[0]))
-        {
-            return shared_ptr<String>(new String(to_string(var->value)));
-        }
-        else if (IS_TYPE(String, var, params[0]))
-        {
-            return params[0];
-        }
-        else if (IS_TYPE(Void, var, params[0]))
-        {
-            return shared_ptr<String>(new String(""));
-        }
-        return Void::noreturn();
+        return shared_ptr<String>(new String(params[0]->asString()));
     }
     else
         throw InvalidArguments(1, params.size(), "function string");

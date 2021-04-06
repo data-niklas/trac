@@ -507,11 +507,13 @@ namespace parser {
     BOOL = 262,                    // BOOL
     LPAREN = 263,                  // LPAREN
     RPAREN = 264,                  // RPAREN
-    COLON = 265,                   // COLON
-    QUESTION = 266,                // QUESTION
-    ACTION = 267,                  // ACTION
-    SEMICOLON = 268,               // SEMICOLON
-    VOID = 269                     // VOID
+    LBRACKET = 265,                // LBRACKET
+    RBRACKET = 266,                // RBRACKET
+    COLON = 267,                   // COLON
+    QUESTION = 268,                // QUESTION
+    ACTION = 269,                  // ACTION
+    SEMICOLON = 270,               // SEMICOLON
+    VOID = 271                     // VOID
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -528,7 +530,7 @@ namespace parser {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 15, ///< Number of tokens.
+        YYNTOKENS = 17, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -540,19 +542,21 @@ namespace parser {
         S_BOOL = 7,                              // BOOL
         S_LPAREN = 8,                            // LPAREN
         S_RPAREN = 9,                            // RPAREN
-        S_COLON = 10,                            // COLON
-        S_QUESTION = 11,                         // QUESTION
-        S_ACTION = 12,                           // ACTION
-        S_SEMICOLON = 13,                        // SEMICOLON
-        S_VOID = 14,                             // VOID
-        S_YYACCEPT = 15,                         // $accept
-        S_tracs = 16,                            // tracs
-        S_trac = 17,                             // trac
-        S_calls = 18,                            // calls
-        S_call = 19,                             // call
-        S_varnames = 20,                         // varnames
-        S_vars = 21,                             // vars
-        S_variable = 22                          // variable
+        S_LBRACKET = 10,                         // LBRACKET
+        S_RBRACKET = 11,                         // RBRACKET
+        S_COLON = 12,                            // COLON
+        S_QUESTION = 13,                         // QUESTION
+        S_ACTION = 14,                           // ACTION
+        S_SEMICOLON = 15,                        // SEMICOLON
+        S_VOID = 16,                             // VOID
+        S_YYACCEPT = 17,                         // $accept
+        S_tracs = 18,                            // tracs
+        S_trac = 19,                             // trac
+        S_calls = 20,                            // calls
+        S_call = 21,                             // call
+        S_varnames = 22,                         // varnames
+        S_vars = 23,                             // vars
+        S_variable = 24                          // variable
       };
     };
 
@@ -939,13 +943,13 @@ switch (yykind)
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {
-        YY_ASSERT (tok == token::END || tok == token::YYerror || tok == token::YYUNDEF || tok == token::LPAREN || tok == token::RPAREN || tok == token::COLON || tok == token::QUESTION || tok == token::ACTION || tok == token::SEMICOLON || tok == token::VOID);
+        YY_ASSERT (tok == token::END || tok == token::YYerror || tok == token::YYUNDEF || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACKET || tok == token::RBRACKET || tok == token::COLON || tok == token::QUESTION || tok == token::ACTION || tok == token::SEMICOLON || tok == token::VOID);
       }
 #else
       symbol_type (int tok, const location_type& l)
         : super_type(token_type (tok), l)
       {
-        YY_ASSERT (tok == token::END || tok == token::YYerror || tok == token::YYUNDEF || tok == token::LPAREN || tok == token::RPAREN || tok == token::COLON || tok == token::QUESTION || tok == token::ACTION || tok == token::SEMICOLON || tok == token::VOID);
+        YY_ASSERT (tok == token::END || tok == token::YYerror || tok == token::YYUNDEF || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACKET || tok == token::RBRACKET || tok == token::COLON || tok == token::QUESTION || tok == token::ACTION || tok == token::SEMICOLON || tok == token::VOID);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1199,6 +1203,36 @@ switch (yykind)
       make_RPAREN (const location_type& l)
       {
         return symbol_type (token::RPAREN, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LBRACKET (location_type l)
+      {
+        return symbol_type (token::LBRACKET, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LBRACKET (const location_type& l)
+      {
+        return symbol_type (token::LBRACKET, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_RBRACKET (location_type l)
+      {
+        return symbol_type (token::RBRACKET, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_RBRACKET (const location_type& l)
+      {
+        return symbol_type (token::RBRACKET, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1580,7 +1614,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 29,     ///< Last index in yytable_.
+      yylast_ = 39,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 2 ///< Termination state number.
     };
@@ -1596,7 +1630,7 @@ switch (yykind)
 
 #line 4 "Trac.yy"
 } // parser
-#line 1600 "Trac.tab.hh"
+#line 1634 "Trac.tab.hh"
 
 
 

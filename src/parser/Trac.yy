@@ -67,6 +67,8 @@
 %token <bool> BOOL
 %token LPAREN
 %token RPAREN
+%token LBRACKET
+%token RBRACKET
 %token COLON
 %token QUESTION
 %token ACTION
@@ -129,6 +131,7 @@ call
    ;
 
 
+
 varnames
    : { $$ = vector<string>();}
    | varnames IDENTIFIER { $$ = $1; $$.push_back($2);}
@@ -146,6 +149,7 @@ variable
 	| IDENTIFIER      { $$ = shared_ptr<Ident>(new Ident($1)); }
 	| BOOL            { $$ = shared_ptr<Boolean>(new Boolean($1)); }
 	| VOID            { $$ = shared_ptr<Void>(new Void()); }
+   | LBRACKET vars RBRACKET            { $$ = shared_ptr<List>(new List($2));}
    | call            { $$ = shared_ptr<Call>($1);   }
 	;
 
