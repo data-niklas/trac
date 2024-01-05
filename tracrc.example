@@ -1,0 +1,1 @@
+active_window_change(): window_id ? ! println(window_name(window_id)) run("notify-send" shell_escape(window_name(window_id)));

@@ -94,9 +94,27 @@ shared_ptr<Variable> print(vector<shared_ptr<Variable>> vars)
     return Void::noreturn();
 }
 
+shared_ptr<Variable> shellEscape(vector<shared_ptr<Variable>> vars)
+{
+    if (vars.size() == 1)
+    {
+        if (IS_TYPE(String, str, vars[0]))
+        {
+            string escaped = "'" + str->value + "'";
+
+            return shared_ptr<String>(new String(escaped));
+        }
+        else
+            throw InvalidType("String", "function shell_escape");
+    }
+    else
+        throw InvalidArguments(1, vars.size(), "function shell_escape");
+}
+
 void registerString(Registry *r)
 {
     r->rFunction(new Function("format_time", formatTime));
     r->rFunction(new Function("println", println));
     r->rFunction(new Function("print", print));
+    r->rFunction(new Function("shell_escape", shellEscape));
 }

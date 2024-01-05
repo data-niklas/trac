@@ -1,8 +1,8 @@
-// A Bison parser, made by GNU Bison 3.7.3.
+// A Bison parser, made by GNU Bison 3.8.2.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
-// Copyright (C) 2002-2015, 2018-2020 Free Software Foundation, Inc.
+// Copyright (C) 2002-2015, 2018-2021 Free Software Foundation, Inc.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // As a special exception, you may create a larger work that contains
 // part or all of the Bison parser skeleton and distribute that work
@@ -137,7 +137,7 @@
 #else // !YYDEBUG
 
 # define YYCDEBUG if (false) std::cerr
-# define YY_SYMBOL_PRINT(Title, Symbol)  YYUSE (Symbol)
+# define YY_SYMBOL_PRINT(Title, Symbol)  YY_USE (Symbol)
 # define YY_REDUCE_PRINT(Rule)           static_cast<void> (0)
 # define YY_STACK_PRINT()                static_cast<void> (0)
 
@@ -174,9 +174,9 @@ namespace parser {
   TracParser::syntax_error::~syntax_error () YY_NOEXCEPT YY_NOTHROW
   {}
 
-  /*---------------.
-  | symbol kinds.  |
-  `---------------*/
+  /*---------.
+  | symbol.  |
+  `---------*/
 
   // basic_symbol.
   template <typename Base>
@@ -236,12 +236,14 @@ namespace parser {
 
 
 
+
   template <typename Base>
   TracParser::symbol_kind_type
   TracParser::basic_symbol<Base>::type_get () const YY_NOEXCEPT
   {
     return this->kind ();
   }
+
 
   template <typename Base>
   bool
@@ -306,28 +308,30 @@ namespace parser {
   }
 
   // by_kind.
-  TracParser::by_kind::by_kind ()
+  TracParser::by_kind::by_kind () YY_NOEXCEPT
     : kind_ (symbol_kind::S_YYEMPTY)
   {}
 
 #if 201103L <= YY_CPLUSPLUS
-  TracParser::by_kind::by_kind (by_kind&& that)
+  TracParser::by_kind::by_kind (by_kind&& that) YY_NOEXCEPT
     : kind_ (that.kind_)
   {
     that.clear ();
   }
 #endif
 
-  TracParser::by_kind::by_kind (const by_kind& that)
+  TracParser::by_kind::by_kind (const by_kind& that) YY_NOEXCEPT
     : kind_ (that.kind_)
   {}
 
-  TracParser::by_kind::by_kind (token_kind_type t)
+  TracParser::by_kind::by_kind (token_kind_type t) YY_NOEXCEPT
     : kind_ (yytranslate_ (t))
   {}
 
+
+
   void
-  TracParser::by_kind::clear ()
+  TracParser::by_kind::clear () YY_NOEXCEPT
   {
     kind_ = symbol_kind::S_YYEMPTY;
   }
@@ -345,11 +349,13 @@ namespace parser {
     return kind_;
   }
 
+
   TracParser::symbol_kind_type
   TracParser::by_kind::type_get () const YY_NOEXCEPT
   {
     return this->kind ();
   }
+
 
 
   // by_state.
@@ -628,7 +634,7 @@ namespace parser {
   TracParser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
   {
     std::ostream& yyoutput = yyo;
-    YYUSE (yyoutput);
+    YY_USE (yyoutput);
     if (yysym.empty ())
       yyo << "empty symbol";
     else
@@ -637,7 +643,7 @@ namespace parser {
         yyo << (yykind < YYNTOKENS ? "token" : "nterm")
             << ' ' << yysym.name () << " ("
             << yysym.location << ": ";
-        YYUSE (yykind);
+        YY_USE (yykind);
         yyo << ')';
       }
   }
@@ -663,7 +669,7 @@ namespace parser {
   }
 
   void
-  TracParser::yypop_ (int n)
+  TracParser::yypop_ (int n) YY_NOEXCEPT
   {
     yystack_.pop (n);
   }
@@ -706,13 +712,13 @@ namespace parser {
   }
 
   bool
-  TracParser::yy_pact_value_is_default_ (int yyvalue)
+  TracParser::yy_pact_value_is_default_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yypact_ninf_;
   }
 
   bool
-  TracParser::yy_table_value_is_error_ (int yyvalue)
+  TracParser::yy_table_value_is_error_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yytable_ninf_;
   }
@@ -925,13 +931,13 @@ namespace parser {
   case 2: // tracs: %empty
 #line 94 "Trac.yy"
       { }
-#line 929 "Trac.tab.cc"
+#line 935 "Trac.tab.cc"
     break;
 
   case 3: // tracs: tracs trac
 #line 95 "Trac.yy"
                 { if (yystack_[0].value.as < Trac* > () != nullptr)result.value.push_back(yystack_[0].value.as < Trac* > ()); }
-#line 935 "Trac.tab.cc"
+#line 941 "Trac.tab.cc"
     break;
 
   case 4: // trac: IDENTIFIER LPAREN vars RPAREN COLON varnames QUESTION calls ACTION calls SEMICOLON
@@ -946,19 +952,19 @@ namespace parser {
          yylhs.value.as < Trac* > () = nullptr;
       } 
    }
-#line 950 "Trac.tab.cc"
+#line 956 "Trac.tab.cc"
     break;
 
   case 5: // calls: %empty
 #line 113 "Trac.yy"
     { yylhs.value.as < vector<Call*> > () = vector<Call*>();}
-#line 956 "Trac.tab.cc"
+#line 962 "Trac.tab.cc"
     break;
 
   case 6: // calls: calls call
 #line 114 "Trac.yy"
                 { yylhs.value.as < vector<Call*> > () = yystack_[1].value.as < vector<Call*> > (); yylhs.value.as < vector<Call*> > ().push_back(yystack_[0].value.as < Call* > ());}
-#line 962 "Trac.tab.cc"
+#line 968 "Trac.tab.cc"
     break;
 
   case 7: // call: IDENTIFIER LPAREN vars RPAREN
@@ -976,83 +982,83 @@ namespace parser {
       }
       if (!error)yylhs.value.as < Call* > () = new Call(yystack_[3].value.as < std::string > (), yystack_[1].value.as < vector<shared_ptr<Variable>> > ());
    }
-#line 980 "Trac.tab.cc"
+#line 986 "Trac.tab.cc"
     break;
 
   case 8: // varnames: %empty
 #line 136 "Trac.yy"
      { yylhs.value.as < vector<string> > () = vector<string>();}
-#line 986 "Trac.tab.cc"
+#line 992 "Trac.tab.cc"
     break;
 
   case 9: // varnames: varnames IDENTIFIER
 #line 137 "Trac.yy"
                          { yylhs.value.as < vector<string> > () = yystack_[1].value.as < vector<string> > (); yylhs.value.as < vector<string> > ().push_back(yystack_[0].value.as < std::string > ());}
-#line 992 "Trac.tab.cc"
+#line 998 "Trac.tab.cc"
     break;
 
   case 10: // vars: %empty
 #line 141 "Trac.yy"
       { yylhs.value.as < vector<shared_ptr<Variable>> > () = vector<shared_ptr<Variable>>();}
-#line 998 "Trac.tab.cc"
+#line 1004 "Trac.tab.cc"
     break;
 
   case 11: // vars: vars variable
 #line 142 "Trac.yy"
                    { yylhs.value.as < vector<shared_ptr<Variable>> > () = yystack_[1].value.as < vector<shared_ptr<Variable>> > (); yylhs.value.as < vector<shared_ptr<Variable>> > ().push_back(yystack_[0].value.as < shared_ptr<Variable> > ());}
-#line 1004 "Trac.tab.cc"
+#line 1010 "Trac.tab.cc"
     break;
 
   case 12: // variable: STRING
 #line 146 "Trac.yy"
                      { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<String>(new String(yystack_[0].value.as < std::string > ())); }
-#line 1010 "Trac.tab.cc"
+#line 1016 "Trac.tab.cc"
     break;
 
   case 13: // variable: INTEGER
 #line 147 "Trac.yy"
                           { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Int>(new Int(yystack_[0].value.as < long > ())); }
-#line 1016 "Trac.tab.cc"
+#line 1022 "Trac.tab.cc"
     break;
 
   case 14: // variable: FLOAT
 #line 148 "Trac.yy"
                           { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Float>(new Float(yystack_[0].value.as < double > ())); }
-#line 1022 "Trac.tab.cc"
+#line 1028 "Trac.tab.cc"
     break;
 
   case 15: // variable: IDENTIFIER
 #line 149 "Trac.yy"
                           { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Ident>(new Ident(yystack_[0].value.as < std::string > ())); }
-#line 1028 "Trac.tab.cc"
+#line 1034 "Trac.tab.cc"
     break;
 
   case 16: // variable: BOOL
 #line 150 "Trac.yy"
                           { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Boolean>(new Boolean(yystack_[0].value.as < bool > ())); }
-#line 1034 "Trac.tab.cc"
+#line 1040 "Trac.tab.cc"
     break;
 
   case 17: // variable: VOID
 #line 151 "Trac.yy"
                           { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Void>(new Void()); }
-#line 1040 "Trac.tab.cc"
+#line 1046 "Trac.tab.cc"
     break;
 
   case 18: // variable: LBRACKET vars RBRACKET
 #line 152 "Trac.yy"
                                        { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<List>(new List(yystack_[1].value.as < vector<shared_ptr<Variable>> > ()));}
-#line 1046 "Trac.tab.cc"
+#line 1052 "Trac.tab.cc"
     break;
 
   case 19: // variable: call
 #line 153 "Trac.yy"
                      { yylhs.value.as < shared_ptr<Variable> > () = shared_ptr<Call>(yystack_[0].value.as < Call* > ());   }
-#line 1052 "Trac.tab.cc"
+#line 1058 "Trac.tab.cc"
     break;
 
 
-#line 1056 "Trac.tab.cc"
+#line 1062 "Trac.tab.cc"
 
             default:
               break;
@@ -1241,6 +1247,10 @@ namespace parser {
 
 
 
+
+
+
+
   const signed char TracParser::yypact_ninf_ = -4;
 
   const signed char TracParser::yytable_ninf_ = -1;
@@ -1272,7 +1282,7 @@ namespace parser {
   const signed char
   TracParser::yydefgoto_[] =
   {
-      -1,     1,     4,    26,    15,    21,     6,    16
+       0,     1,     4,    26,    15,    21,     6,    16
   };
 
   const signed char
@@ -1367,7 +1377,7 @@ namespace parser {
 #endif // YYDEBUG
 
   TracParser::symbol_kind_type
-  TracParser::yytranslate_ (int t)
+  TracParser::yytranslate_ (int t) YY_NOEXCEPT
   {
     // YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to
     // TOKEN-NUM as returned by yylex.
@@ -1410,14 +1420,14 @@ namespace parser {
     if (t <= 0)
       return symbol_kind::S_YYEOF;
     else if (t <= code_max)
-      return YY_CAST (symbol_kind_type, translate_table[t]);
+      return static_cast <symbol_kind_type> (translate_table[t]);
     else
       return symbol_kind::S_YYUNDEF;
   }
 
 #line 4 "Trac.yy"
 } // parser
-#line 1421 "Trac.tab.cc"
+#line 1431 "Trac.tab.cc"
 
 #line 158 "Trac.yy"
 
